@@ -1,6 +1,6 @@
 describe PostcodeAnywhere::Error do
   before do
-    @client = PostcodeAnywhere::CleansePlus::Client.new
+    @client = PostcodeAnywhere::CleansePlus::Client.new(api_key: 'error_test_key')
   end
 
   describe '#message' do
@@ -37,14 +37,15 @@ describe PostcodeAnywhere::Error do
         '[{"Error":"2","Description":"UK","Cause":"CS","Resolution":"RS"}]'
 
       endpoint = PostcodeAnywhere::CleansePlus::Interactive::CLEANSE_ADDRESS_ENDPOINT
-      stub_get(endpoint).to_return(
+      query_params = { 'Key' => 'error_test_key', 'Address' => 'A' }
+      stub_get(endpoint).with(query: query_params).to_return(
         status: 200,
         body: body,
         headers: { content_type: 'application/json; charset=utf-8' }
       )
     end
     it 'raises an exception with the proper message' do
-      expect { @client.cleanse_address('') }.to raise_error do |error|
+      expect { @client.address_candidates_for('A') }.to raise_error do |error|
         expect(error).to be_a PostcodeAnywhere::Error::UnknownKey
         expect(error.message).to eq 'UK'
         expect(error.cause).to eq 'CS'
@@ -57,10 +58,11 @@ describe PostcodeAnywhere::Error do
     context "when HTTP status is #{status}" do
       before do
         endpoint = PostcodeAnywhere::CleansePlus::Interactive::CLEANSE_ADDRESS_ENDPOINT
-        stub_get(endpoint).to_return(status: status)
+        query_params = { 'Key' => 'error_test_key', 'Address' => 'A' }
+        stub_get(endpoint).with(query: query_params).to_return(status: status)
       end
       it "raises #{exception}" do
-        expect { @client.cleanse_address('') }.to raise_error(exception)
+        expect { @client.address_candidates_for('A') }.to raise_error(exception)
       end
     end
   end

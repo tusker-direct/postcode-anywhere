@@ -25,8 +25,12 @@ def a_post(path)
   a_request(:post, PostcodeAnywhere.endpoint + path)
 end
 
+def a_get(path)
+  a_request(:get, PostcodeAnywhere.endpoint + path)
+end
+
 def fixture_path
-  File.expand_path('../fixtures', __FILE__)
+  File.expand_path('../postcode_anywhere/fixtures', __FILE__)
 end
 
 def fixture(file)

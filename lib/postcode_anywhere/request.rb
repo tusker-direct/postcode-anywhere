@@ -16,7 +16,7 @@ module PostcodeAnywhere
     end
 
     def perform_with_object(klass)
-      klass.new(perform.first)
+      klass.new(perform)
     end
 
     def perform_with_objects(klass)

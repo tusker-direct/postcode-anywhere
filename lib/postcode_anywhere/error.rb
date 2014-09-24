@@ -112,6 +112,5 @@ module PostcodeAnywhere
     FreeLimitExceeded = Class.new(Forbidden)
     IncorrectKeyType = Class.new(Forbidden)
     KeyExpired = Class.new(Forbidden)
-    KeyDailyLimitExceeded = Class.new(Forbidden)
   end
 end

@@ -10,9 +10,9 @@ module PostcodeAnywhere
 
       CLEANSE_ADDRESS_ENDPOINT = "CleansePlus/Interactive/Cleanse/v#{API_VERSION}/json.ws"
 
-      def cleanse_address(address, options = {})
-        address
-        perform_with_object(
+      def address_candidates_for(address, options = {})
+        options.merge!('Address' => address)
+        perform_with_objects(
           :get,
           CLEANSE_ADDRESS_ENDPOINT,
           options,

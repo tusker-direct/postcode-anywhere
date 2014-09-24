@@ -65,6 +65,7 @@ module PostcodeAnywhere
     private
 
     def request(method, path, params = {}, body_hash = {})
+      attach_api_key_to params
       connection.send(method.to_sym, path, params) do |request|
         request.body = compile_body(body_hash) unless body_hash.empty?
       end.env
@@ -72,6 +73,10 @@ module PostcodeAnywhere
         raise(PostcodeAnywhere::Error::RequestTimeout.new(error))
       rescue Faraday::Error::ClientError, JSON::ParserError => error
         raise(PostcodeAnywhere::Error.new(error))
+    end
+
+    def attach_api_key_to(params)
+      params.merge!('Key' => @api_key) unless params.keys.include? 'Key'
     end
 
     def compile_body(body_hash)

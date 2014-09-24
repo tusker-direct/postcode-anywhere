@@ -42,7 +42,14 @@ module PostcodeAnywhere
           parse(response.body) if
             respond_to?(:parse) && !unparsable_status_codes.include?(response.status)
         raise_errors_in response.body
-        response.body
+        response.body = breakout_items response.body
+      end
+
+      def breakout_items(response_body)
+        if response_body.class == Hash && response_body.keys.include?(:items)
+          return response_body[:items]
+        end
+        response_body
       end
 
       def raise_errors_in(response_body)
