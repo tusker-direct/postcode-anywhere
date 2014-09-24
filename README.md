@@ -1,6 +1,8 @@
-# PostcodeAnywhere
+# Postcode Anywhere
 
-TODO: Write a gem description
+[ ![Codeship Status for simplemerchant/postcode_anywhere](https://codeship.io/projects/ade82b60-260e-0132-ce11-5220aac52c67/status)](https://codeship.io/projects/37329)
+
+This is the Ruby gem for interacting with the [Postcode Anywhere API](http://www.postcodeanywhere.co.uk/support/webservices/) API
 
 ## Installation
 
@@ -20,11 +22,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This Gem consists of a numer of available clients for each key service available from
+Postcode Anywhere
+
+The client can be configured upon instantiation.
+
+```ruby
+client = PostcodeAnywhere::Client.new(
+  license_key:  'YOUR_API_KEY',
+)
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/postcode_anywhere/fork )
+1. Fork it ( https://github.com/simplemerchant/postcode_anywhere/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
