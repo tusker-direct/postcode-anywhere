@@ -4,7 +4,8 @@ require 'json'
 require 'timeout'
 require 'postcode_anywhere/error'
 require 'postcode_anywhere/response/raise_error'
-# require 'postcode_anywhere/response/parse_json'
+require 'postcode_anywhere/response/parse_json'
+
 module PostcodeAnywhere
   class Client
     attr_accessor(*Configuration::VALID_CONFIG_KEYS)
@@ -55,7 +56,7 @@ module PostcodeAnywhere
         # Handle error responses
         faraday.response :postcode_anywhere_raise_error
         # Parse JSON response bodies
-        # faraday.response :postcode_anywhere_parse_json
+        faraday.response :postcode_anywhere_parse_json
         # Set default HTTP adapter
         faraday.adapter :net_http
       end
@@ -65,7 +66,7 @@ module PostcodeAnywhere
 
     def request(method, path, params = {}, body_hash = {})
       connection.send(method.to_sym, path, params) do |request|
-        request.body = compile_body(body_hash, true)
+        request.body = compile_body(body_hash) unless body_hash.empty?
       end.env
       rescue Faraday::Error::TimeoutError, Timeout::Error => error
         raise(PostcodeAnywhere::Error::RequestTimeout.new(error))

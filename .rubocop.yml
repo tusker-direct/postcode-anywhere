@@ -35,7 +35,7 @@ CharacterLiteral:
   Enabled: true
 
 ClassLength:
-  Enabled: true
+  Enabled: false
 
 ClassVars:
   Enabled: false

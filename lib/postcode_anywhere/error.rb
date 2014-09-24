@@ -1,10 +1,14 @@
 module PostcodeAnywhere
-  # Custom error class for rescuing from all Twitter errors
+  # Custom error class for rescuing from all PostcodeAnywhere errors
   class Error < StandardError
+    attr_reader :code
+    attr_reader :cause
+    attr_reader :resolution
+
     class << self
-      def from_response(response)
-        message = parse_error(response.body)
-        new(message)
+      def from_response(error_hash)
+        message, code, cause, resolution = parse_error(error_hash)
+        new(message, code, cause, resolution)
       end
 
       def errors
@@ -24,13 +28,40 @@ module PostcodeAnywhere
         }
       end
 
+      def postcode_anywhere_errors
+        @postcode_anywhere_errors ||= {
+          -1 => PostcodeAnywhere::Error::UnknownError,
+          2  => PostcodeAnywhere::Error::UnknownKey,
+          3  => PostcodeAnywhere::Error::AccountOutOfCredit,
+          4  => PostcodeAnywhere::Error::IpDenied,
+          5  => PostcodeAnywhere::Error::UrlDenied,
+          6  => PostcodeAnywhere::Error::ServiceDeniedForKey,
+          7  => PostcodeAnywhere::Error::ServiceDeniedForPlan,
+          8  => PostcodeAnywhere::Error::KeyDailyLimitExceeded,
+          9  => PostcodeAnywhere::Error::SurgeProtectorRunning,
+          10 => PostcodeAnywhere::Error::SurgeProtectorTriggered,
+          11 => PostcodeAnywhere::Error::NoValidLicense,
+          12 => PostcodeAnywhere::Error::ManagementKeyRequired,
+          13 => PostcodeAnywhere::Error::DemoLimitExceeded,
+          14 => PostcodeAnywhere::Error::FreeLimitExceeded,
+          15 => PostcodeAnywhere::Error::IncorrectKeyType,
+          16 => PostcodeAnywhere::Error::KeyExpired,
+          17 => PostcodeAnywhere::Error::KeyDailyLimitExceeded
+        }
+      end
+
       private
 
-      def parse_error(body)
-        if body.nil? || (message = extract_message_from_error(body)).nil?
-          ''
+      def parse_error(error_hash)
+        if error_hash.nil?
+          ['', nil, '', '']
         else
-          message
+          [
+            error_hash[:description],
+            error_hash[:error],
+            error_hash[:cause],
+            error_hash[:resolution]
+          ]
         end
       end
 
@@ -41,8 +72,11 @@ module PostcodeAnywhere
       end
     end
 
-    def initialize(message = '')
-      super(message)
+    def initialize(description = '', code = nil, cause = '', resolution = '')
+      super(description)
+      @code = code
+      @cause = cause
+      @resolution = resolution
     end
 
     ClientError = Class.new(self)
@@ -59,5 +93,25 @@ module PostcodeAnywhere
     BadGateway = Class.new(ServerError)
     ServiceUnavailable = Class.new(ServerError)
     GatewayTimeout = Class.new(ServerError)
+
+    # Postcode anywhere specific errors
+
+    UnknownError = Class.new(ServerError)
+    UnknownKey = Class.new(ClientError)
+    AccountOutOfCredit = Class.new(Forbidden)
+    IpDenied = Class.new(Forbidden)
+    UrlDenied = Class.new(Forbidden)
+    ServiceDeniedForKey = Class.new(Forbidden)
+    ServiceDeniedForPlan = Class.new(Forbidden)
+    KeyDailyLimitExceeded = Class.new(Forbidden)
+    SurgeProtectorRunning = Class.new(Forbidden)
+    SurgeProtectorTriggered = Class.new(Forbidden)
+    NoValidLicense = Class.new(Forbidden)
+    ManagementKeyRequired = Class.new(Forbidden)
+    DemoLimitExceeded = Class.new(Forbidden)
+    FreeLimitExceeded = Class.new(Forbidden)
+    IncorrectKeyType = Class.new(Forbidden)
+    KeyExpired = Class.new(Forbidden)
+    KeyDailyLimitExceeded = Class.new(Forbidden)
   end
 end
