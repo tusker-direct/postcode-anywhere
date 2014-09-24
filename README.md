@@ -103,6 +103,31 @@ corrected_account_number, iban, bank, bank_bic, branch, branch_bic,
 contact_address_line1, contact_address_line2, contact_post_town, contact_postcode,
 contact_phone, contact_fax, faster_payments_supported, chaps_supported**
 
+### [Email Validation](http://www.postcodeanywhere.co.uk/email-validation/api/)
+
+#### [Validate email](http://www.postcodeanywhere.co.uk/Support/WebService/EmailValidation/Interactive/Validate/1.1/)
+
+An email address can be validated:
+
+```ruby
+  client = PostcodeAnywhere::EmailValidation::Client.new(
+    license_key:  'YOUR_API_KEY',
+  )
+
+  validation = a.validate_email_address('some_email_address@email.com')
+
+  # Options then are
+
+  validation.valid_format
+  # => true
+  validation.found_dns_record
+  # => true
+  validation.mail_server
+  # => 'aspmx3.googlemail.com'
+  validation.email
+  # => 'some_email_address@email.com'
+```
+
 ## Errors
 
 If there is something critically wrong with the service, then the gem will throw a relevant
