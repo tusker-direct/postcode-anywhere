@@ -33,8 +33,16 @@ module PostcodeAnywhere
         when Hash
           Hash[value.map { |k, v| [underscore_key(k), convert_hash_keys(v)] }]
         else
-          value
+          convert_boolean value
         end
+      end
+
+      def convert_boolean(value)
+        return nil unless value
+        return value unless value.class == String
+        return true if (value.downcase == 'true')
+        return false if (value.downcase == 'false')
+        value
       end
 
       def on_complete(response)

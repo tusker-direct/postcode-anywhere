@@ -16,7 +16,12 @@ module PostcodeAnywhere
     end
 
     def perform_with_object(klass)
-      klass.new(perform)
+      result = perform
+      if result.class == Array
+        klass.new(result.first)
+      else
+        klass.new(result)
+      end
     end
 
     def perform_with_objects(klass)

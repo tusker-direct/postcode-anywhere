@@ -32,13 +32,54 @@ and it's well tested.
 This Gem consists of a numer of available clients for each key service available from
 Postcode Anywhere
 
-The client can be configured upon instantiation.
+### [Data Cleansing](http://www.postcodeanywhere.co.uk/Support/WebService/CleansePlus/Interactive/Cleanse/1/)
+
+An address can be cleansed by using the CleansePlus client, as follows:
 
 ```ruby
-client = PostcodeAnywhere::CleansePlus::Client.new(
-  license_key:  'YOUR_API_KEY',
-)
+  client = PostcodeAnywhere::CleansePlus::Client.new(
+    license_key:  'YOUR_API_KEY',
+  )
+
+  addresses = client.address_candidates_for 'London, SW1A 1AA'
+
+  addresses.first.company
+    # =>"Buckingham Palace"
 ```
+
+The following fields are available on an address:
+
+**udprn, company, department, line1, line2, line3, line4, line5, post_town, county,
+postcode, mailsort, barcode, type, delivery_point_suffix, sub_building, building_name,
+building_number, primary_street, secondary_street, double_dependent_locality,
+dependent_locality, po_box**
+
+### [Payment Validation](http://www.postcodeanywhere.co.uk/bank-account-validation/api/)
+
+#### [Retrieve by sort code](http://www.postcodeanywhere.co.uk/Support/WebService/BankAccountValidation/Interactive/RetrieveBySortcode/1/)
+
+A bank branch can be retrieved from a sort code:
+
+```ruby
+  client = PostcodeAnywhere::BankAccountValidation::Client.new(
+    license_key:  'YOUR_API_KEY',
+  )
+
+  branch = client.retrieve_by_sortcode '40-17-53'
+
+  branch.contact_postcode
+  # => "GL53 7RA"
+  branch.bank
+  # => "HSBC BANK PLC"
+  branch.faster_payments_supported
+  # => true
+```
+
+The following fields are available on a bank branch:
+
+**bank, bank_bic, branch, branch_bic, contact_address_line1, contact_address_line2,
+contact_post_town, contact_postcode, contact_phone, contact_fax,
+faster_payments_supported, chaps_supported**
 
 ## Errors
 
