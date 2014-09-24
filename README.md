@@ -20,6 +20,12 @@ Or install it yourself as:
 
     $ gem install postcode_anywhere
 
+## Small disclaimer
+
+The general architecture of this Gem is completely ripped off from that of the
+[Twitter API Gem](https://github.com/sferik/twitter). Mainly because this structure has
+worked well for us in the past and it's well tested.
+
 ## Usage
 
 This Gem consists of a numer of available clients for each key service available from
