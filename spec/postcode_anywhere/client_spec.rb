@@ -1,4 +1,4 @@
-describe PostcodeAnywhere::Client do
+describe 'PostcodeAnywhere::Client' do
   before do
     @keys = PostcodeAnywhere::Configuration::VALID_CONFIG_KEYS
   end
