@@ -81,6 +81,28 @@ The following fields are available on a bank branch:
 contact_post_town, contact_postcode, contact_phone, contact_fax,
 faster_payments_supported, chaps_supported**
 
+#### [Validate account](http://www.postcodeanywhere.co.uk/support/webservice/bankaccountvalidation/interactive/validate/2/)
+
+A bank account number and sort code can be validated:
+
+```ruby
+  client = PostcodeAnywhere::BankAccountValidation::Client.new(
+    license_key:  'YOUR_API_KEY',
+  )
+
+  validation = a.validate_account('12345678','11-22-33')
+
+  validation.is_correct
+  # => true
+```
+
+The following fields are available for a validation:
+
+**is_correct, is_direct_debit_capable, status_information, corrected_sort_code,
+corrected_account_number, iban, bank, bank_bic, branch, branch_bic,
+contact_address_line1, contact_address_line2, contact_post_town, contact_postcode,
+contact_phone, contact_fax, faster_payments_supported, chaps_supported**
+
 ## Errors
 
 If there is something critically wrong with the service, then the gem will throw a relevant
