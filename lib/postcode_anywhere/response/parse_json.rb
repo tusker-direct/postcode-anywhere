@@ -70,7 +70,13 @@ module PostcodeAnywhere
 
       def error_klass_for(code)
         klass = PostcodeAnywhere::Error.postcode_anywhere_errors[code]
-        klass = PostcodeAnywhere::Error::UnknownError unless klass
+        if !klass
+          if code > 1000
+            klass = PostcodeAnywhere::Error::ServiceSpecificError
+          else
+            PostcodeAnywhere::Error::UnknownError
+          end
+        end
         klass
       end
 

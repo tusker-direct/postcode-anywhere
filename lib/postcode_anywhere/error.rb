@@ -112,5 +112,7 @@ module PostcodeAnywhere
     FreeLimitExceeded = Class.new(Forbidden)
     IncorrectKeyType = Class.new(Forbidden)
     KeyExpired = Class.new(Forbidden)
+
+    ServiceSpecificError = Class.new(ClientError)
   end
 end
