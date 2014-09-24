@@ -90,7 +90,7 @@ A bank account number and sort code can be validated:
     license_key:  'YOUR_API_KEY',
   )
 
-  validation = a.validate_account('12345678','11-22-33')
+  validation = client.validate_account('12345678','11-22-33')
 
   validation.is_correct
   # => true
@@ -114,7 +114,7 @@ An email address can be validated:
     license_key:  'YOUR_API_KEY',
   )
 
-  validation = a.validate_email_address('some_email_address@email.com')
+  validation = client.validate_email_address('some_email_address@email.com')
 
   # Options then are
 
