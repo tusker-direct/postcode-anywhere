@@ -1,5 +1,6 @@
 require 'postcode_anywhere/utils'
 require 'postcode_anywhere/capture_plus/search_result'
+require 'postcode_anywhere/capture_plus/retrieve_result'
 require 'postcode_anywhere/capture_plus/query_type'
 
 module PostcodeAnywhere
@@ -10,6 +11,8 @@ module PostcodeAnywhere
       API_VERSION = '2.00'
 
       FIND_ADDRESSES_ENDPOINT = "CapturePlus/Interactive/Find/v#{API_VERSION}/json.ws"
+
+      RETRIEVE_ADDRESS_ENDPOINT = "CapturePlus/Interactive/Retrieve/v#{API_VERSION}/json.ws"
 
       def query(search_term, options = {})
         options.merge!(
@@ -45,6 +48,19 @@ module PostcodeAnywhere
       def query_postcodes(search_term, options = {})
         options.merge!(search_for: POSTCODE)
         query search_term, options
+      end
+
+      def retrieve(search_result)
+        options = {}
+        options.merge!(
+          'Id' => ParentIdExtractor.new(search_result).extract
+        )
+        perform_with_object(
+          :get,
+          RETRIEVE_ADDRESS_ENDPOINT,
+          options,
+          PostcodeAnywhere::CapturePlus::RetrieveResult
+        )
       end
 
       class ParentIdExtractor

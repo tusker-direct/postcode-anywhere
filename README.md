@@ -36,7 +36,7 @@ This searches everyhing:
 
 ```ruby
   client = PostcodeAnywhere::CapturePlus::Client.new(
-    license_key:  'YOUR_API_KEY',
+    api_key:  'YOUR_API_KEY',
   )
 
   results = client.query 'buckingham pal'
@@ -52,7 +52,7 @@ This searches by postcode:
 
 ```ruby
   client = PostcodeAnywhere::CapturePlus::Client.new(
-    license_key:  'YOUR_API_KEY',
+    api_key:  'YOUR_API_KEY',
   )
 
   results = client.query_postcodes 'SW1A'
@@ -71,7 +71,7 @@ This searches by postcode:
 
 ```ruby
   client = PostcodeAnywhere::CapturePlus::Client.new(
-    license_key:  'YOUR_API_KEY',
+    api_key:  'YOUR_API_KEY',
   )
 
   results = client.query_companies 'Asda'
@@ -90,7 +90,7 @@ This searches by postcode:
 
 ```ruby
   client = PostcodeAnywhere::CapturePlus::Client.new(
-    license_key:  'YOUR_API_KEY',
+    api_key:  'YOUR_API_KEY',
   )
 
   results = client.query_places 'Hyde park, london'
@@ -103,13 +103,65 @@ This searches by postcode:
   # => "Hyde Park, London, W2..."
 ```
 
+### Sub query and refinement
+
+Some search results have a 'next' value of 'Find'. These can be queried into by using
+a sub query:
+
+```ruby
+  client = PostcodeAnywhere::CapturePlus::Client.new(
+    api_key:  'YOUR_API_KEY',
+  )
+
+  results = client.query_places 'Hyde park, london'
+  hyde_park_result = results.first
+
+  hyde_park_result.next
+  # => "Find"
+
+  hyde_park_sub_result = client.sub_query('park', hyde_park_result)
+
+  hyde_park_sub_result.first.text
+  # => => "Veranda Lodge, Metropolitan Police, The Royal Parks Operational Command Unit, The Old Police House, Hyde Park, London, W2..."
+```
+
+### NOTE: Only search results which have the 'next' value of 'Find' will return a meaningful result. Results with a 'next' of 'Retrieve' should be retrieved (see below)
+
+### Retrieval
+
+The full details of a search result can be retrieved as follows:
+
+### IMPORTANT: Only search results which have the 'next' value of 'Retrieve' will return a result. Search results with 'next' of 'Find' need to be refined with a sub_query. (See above)
+
+A retrieved result has a full set of available fields to it which are listed in the [postcode anywhere docs](http://www.postcodeanywhere.co.uk/support/webservice/captureplus/interactive/retrieve/2/)
+
+```ruby
+  client = PostcodeAnywhere::CapturePlus::Client.new(
+    api_key:  'YOUR_API_KEY',
+  )
+
+  results = client.query_places 'Hyde park, london'
+  hyde_park_result = results.first
+  hyde_park_sub_result = client.sub_query('park', hyde_park_result)
+
+  hyde_park_police_result = hyde_park_sub_result.first
+
+  hyde_park_police = client.retrieve(hyde_park_police_result)
+
+  hyde_park_police.department
+  # => "The Royal Parks Operational Command Unit"
+
+  hyde_park_police.postal_code
+  # => => "W2 2UH"
+```
+
 ### [Data Cleansing](http://www.postcodeanywhere.co.uk/Support/WebService/CleansePlus/Interactive/Cleanse/1/)
 
 An address can be cleansed by using the CleansePlus client, as follows:
 
 ```ruby
   client = PostcodeAnywhere::CleansePlus::Client.new(
-    license_key:  'YOUR_API_KEY',
+    api_key:  'YOUR_API_KEY',
   )
 
   addresses = client.address_candidates_for 'London, SW1A 1AA'
@@ -133,7 +185,7 @@ A bank branch can be retrieved from a sort code:
 
 ```ruby
   client = PostcodeAnywhere::BankAccountValidation::Client.new(
-    license_key:  'YOUR_API_KEY',
+    api_key:  'YOUR_API_KEY',
   )
 
   branch = client.retrieve_by_sortcode '40-17-53'
@@ -158,7 +210,7 @@ A bank account number and sort code can be validated:
 
 ```ruby
   client = PostcodeAnywhere::BankAccountValidation::Client.new(
-    license_key:  'YOUR_API_KEY',
+    api_key:  'YOUR_API_KEY',
   )
 
   validation = client.validate_account('12345678','11-22-33')
@@ -182,7 +234,7 @@ An email address can be validated:
 
 ```ruby
   client = PostcodeAnywhere::EmailValidation::Client.new(
-    license_key:  'YOUR_API_KEY',
+    api_key:  'YOUR_API_KEY',
   )
 
   validation = client.validate_email_address('some_email_address@email.com')
