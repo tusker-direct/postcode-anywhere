@@ -4,12 +4,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'postcode_anywhere/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "postcode_anywhere"
+  spec.name          = "postcode-anywhere"
   spec.version       = PostcodeAnywhere::VERSION
   spec.authors       = ["Edward Woodcock"]
   spec.email         = ["edward@simple-merchant.com"]
-  spec.summary       = %q{Client gem for Postcode Anywhere API - http://postcodeanywhere.co.uk}
-  spec.description   = %q{This gem provides a number of clients for interacting with the API}
+  spec.summary       = %q{Full set of Postcode Anywhere API clients - http://postcodeanywhere.co.uk}
+  spec.description   = %q{A number of fully-tested clients for interacting with all of the available postcode anywhere services, including capture, cleansing, payment validation and email validation}
   spec.homepage      = "https://github.com/simplemerchant/postcode_anywhere"
   spec.license       = "MIT"
 
