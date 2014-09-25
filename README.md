@@ -25,6 +25,20 @@ Or install it yourself as:
 This Gem consists of a numer of available clients for each key service available from
 Postcode Anywhere
 
+### Configuration
+
+Each client is configured upon instantiation:
+
+```ruby
+client = PostcodeAnywhere::CapturePlus::Client.new(
+  # Mandatory
+  api_key:  'YOUR_API_KEY',
+
+  # Optional: If not set, defaults to: 'Postcode Anywhere Ruby Gem/1.0.1'
+  user_agent: 'YOUR_APPLICATION_USER_AGENT'
+)
+```
+
 ### [CapturePlus Address Validation](http://www.postcodeanywhere.co.uk/address-validation/api/)
 
 Addresses can be searched upon by a number of different means. An array of results is always
