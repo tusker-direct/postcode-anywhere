@@ -125,13 +125,13 @@ a sub query:
   # => => "Veranda Lodge, Metropolitan Police, The Royal Parks Operational Command Unit, The Old Police House, Hyde Park, London, W2..."
 ```
 
-### NOTE: Only search results which have the 'next' value of 'Find' will return a meaningful result. Results with a 'next' of 'Retrieve' should be retrieved (see below)
+##### NOTE: Only search results which have the 'next' value of 'Find' will return a meaningful result. Results with a 'next' of 'Retrieve' should be retrieved (see below)
 
 ### Retrieval
 
 The full details of a search result can be retrieved as follows:
 
-### IMPORTANT: Only search results which have the 'next' value of 'Retrieve' will return a result. Search results with 'next' of 'Find' need to be refined with a sub_query. (See above)
+##### IMPORTANT: Only search results which have the 'next' value of 'Retrieve' will return a result. Search results with 'next' of 'Find' need to be refined with a sub_query. (See above)
 
 A retrieved result has a full set of available fields to it which are listed in the [postcode anywhere docs](http://www.postcodeanywhere.co.uk/support/webservice/captureplus/interactive/retrieve/2/)
 
