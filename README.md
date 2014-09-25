@@ -20,13 +20,6 @@ Or install it yourself as:
 
     $ gem install postcode_anywhere
 
-## Small disclaimer
-
-The general architecture of this Gem is completely ripped off from that of the
-[Twitter API Gem](https://github.com/sferik/twitter) so credit to be directed that way.
-This has been used mainly because this structure generally works well for us
-and it's well tested.
-
 ## Usage
 
 This Gem consists of a numer of available clients for each key service available from
@@ -179,6 +172,13 @@ Some Postcode Anywhere errors include:
 | `PostcodeAnywhere::Error::FreeLimitExceeded`       | You have used too many free web services.                                                                                                       | Our web services are designed to operate in stages. The first is usually a Find service followed by a Retrieve. If you use too many Finds without the corresponding number of Retrieves you will receive this error. For more information, please contact us. |
 | `PostcodeAnywhere::Error::IncorrectKeyType`        | The type of key you're using isn't supported by this web service.                                                                               | This usually happens if you're using a user or server license with a web service that only supports transactional keys. Please use another key and try again.                                                                                                 |
 | `PostcodeAnywhere::Error::KeyExpired`              | The key you are trying to use has expired.                                                                                                      | Please check that you are using the right key. A new one may have been issued if you recently renewed your key. Contact us if you have any questions.                                                                                                         |
+
+## Small disclaimer
+
+The general architecture of this Gem is completely ripped off from that of the
+[Twitter API Gem](https://github.com/sferik/twitter) so credit to be directed that way.
+This has been used mainly because this structure generally works well for us
+and it's well tested.
 
 ## Contributing
 
