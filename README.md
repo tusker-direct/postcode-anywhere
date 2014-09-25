@@ -25,6 +25,84 @@ Or install it yourself as:
 This Gem consists of a numer of available clients for each key service available from
 Postcode Anywhere
 
+### [CapturePlus Address Validation](http://www.postcodeanywhere.co.uk/address-validation/api/)
+
+Addresses can be searched upon by a number of different means. An array of results is always
+returned:
+
+#### General search
+
+This searches everyhing:
+
+```ruby
+  client = PostcodeAnywhere::CapturePlus::Client.new(
+    license_key:  'YOUR_API_KEY',
+  )
+
+  results = client.query 'buckingham pal'
+  results.count
+  # => 7
+  results.first.text
+  # => "Buckingham Palace, London, SW1A..."
+```
+
+#### By postcode
+
+This searches by postcode:
+
+```ruby
+  client = PostcodeAnywhere::CapturePlus::Client.new(
+    license_key:  'YOUR_API_KEY',
+  )
+
+  results = client.query_postcodes 'SW1A'
+  # OR
+  results = client.query 'SW1A', search_for: PostcodeAnywhere::CapturePlus::POSTCODE
+
+  results.count
+  # => 10
+  results.first.text
+  # => "SW1A 0AA"
+```
+
+#### By company
+
+This searches by postcode:
+
+```ruby
+  client = PostcodeAnywhere::CapturePlus::Client.new(
+    license_key:  'YOUR_API_KEY',
+  )
+
+  results = client.query_companies 'Asda'
+  # OR
+  results = client.query 'Asda', search_for: PostcodeAnywhere::CapturePlus::COMPANY
+
+  results.count
+  # => 7
+  results.first.text
+  # => "Asda Stores Ltd, Ipswich, IP1..."
+```
+
+#### By place
+
+This searches by postcode:
+
+```ruby
+  client = PostcodeAnywhere::CapturePlus::Client.new(
+    license_key:  'YOUR_API_KEY',
+  )
+
+  results = client.query_places 'Hyde park, london'
+  # OR
+  results = client.query 'Hyde park, london', search_for: PostcodeAnywhere::CapturePlus::PLACE
+
+  results.count
+  # => 7
+  results.first.text
+  # => "Hyde Park, London, W2..."
+```
+
 ### [Data Cleansing](http://www.postcodeanywhere.co.uk/Support/WebService/CleansePlus/Interactive/Cleanse/1/)
 
 An address can be cleansed by using the CleansePlus client, as follows:
@@ -175,10 +253,10 @@ Some Postcode Anywhere errors include:
 
 ## Small disclaimer
 
-The general architecture of this Gem is completely ripped off from that of the
+The general architecture of this Gem is taken from that of the
 [Twitter API Gem](https://github.com/sferik/twitter) so credit to be directed that way.
-This has been used mainly because this structure generally works well for us
-and it's well tested.
+This structure has been used mainly because this structure generally works well for us
+at Simple Merchant and it's well tested.
 
 ## Contributing
 
