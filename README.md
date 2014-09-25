@@ -81,7 +81,7 @@ This searches by postcode:
 
 #### By company
 
-This searches by postcode:
+This searches by company:
 
 ```ruby
   client = PostcodeAnywhere::CapturePlus::Client.new(
@@ -100,7 +100,7 @@ This searches by postcode:
 
 #### By place
 
-This searches by postcode:
+This searches by place:
 
 ```ruby
   client = PostcodeAnywhere::CapturePlus::Client.new(
