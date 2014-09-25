@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["edward@simple-merchant.com"]
   spec.summary       = %q{Full set of Postcode Anywhere API clients - http://postcodeanywhere.co.uk}
   spec.description   = %q{A number of fully-tested clients for interacting with all of the available postcode anywhere services, including capture, cleansing, payment validation and email validation}
-  spec.homepage      = "https://github.com/simplemerchant/postcode_anywhere"
+  spec.homepage      = "https://github.com/simplemerchant/postcode-anywhere"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
