@@ -9,7 +9,7 @@ This is the Ruby gem for interacting with the [Postcode Anywhere API](http://www
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'postcode_anywhere'
+gem 'postcode-anywhere'
 ```
 
 And then execute:
