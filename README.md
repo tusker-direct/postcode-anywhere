@@ -18,7 +18,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install postcode_anywhere
+    $ gem install postcode-anywhere
 
 ## Usage
 
