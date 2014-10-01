@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    postcode-anywhere (1.0.3)
+    postcode-anywhere (1.0.4)
       faraday (~> 0.9, >= 0.9.0)
       memoizable (~> 0.4, >= 0.4.2)
 

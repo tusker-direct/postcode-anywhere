@@ -1,3 +1,5 @@
+require 'postcode_anywhere/version'
+
 module PostcodeAnywhere
   module Configuration
     VALID_CONNECTION_KEYS = [
