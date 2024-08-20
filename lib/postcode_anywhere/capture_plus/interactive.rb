@@ -25,7 +25,7 @@ module PostcodeAnywhere
         perform_with_objects(
           :get,
           FIND_ADDRESSES_ENDPOINT,
-          options,
+          options.compact,
           PostcodeAnywhere::CapturePlus::SearchResult
         )
       end
