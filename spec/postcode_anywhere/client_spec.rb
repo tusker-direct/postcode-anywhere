@@ -78,7 +78,7 @@ describe PostcodeAnywhere::Client do
       let(:connection_client) { PostcodeAnywhere::Client.new(endpoint: 'http://localhost') }
       it 'catches and reraises Faraday timeout errors' do
         allow(connection_client).to receive(:connection).and_raise(
-          Faraday::Error::TimeoutError.new('execution expired')
+          Faraday::TimeoutError.new('execution expired')
         )
         expect { connection_client.send(:request, :get, '/path') }.to raise_error(
           PostcodeAnywhere::Error::RequestTimeout
@@ -94,7 +94,7 @@ describe PostcodeAnywhere::Client do
       end
       it 'catches and reraises Faraday client errors' do
         allow(connection_client).to receive(:connection).and_raise(
-          Faraday::Error::ClientError.new('connection failed')
+          Faraday::ClientError.new('connection failed')
         )
         expect { connection_client.send(:request, :get, '/path') }.to raise_error(
           PostcodeAnywhere::Error

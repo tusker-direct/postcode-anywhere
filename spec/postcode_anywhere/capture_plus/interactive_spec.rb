@@ -10,7 +10,6 @@ describe PostcodeAnywhere::CapturePlus::Interactive do
         'Key' => 'interactive_test_key',
         'SearchTerm' => 'A',
         'SearchFor' => 'Everything',
-        'LastId' => '',
         'Country' => 'GBR',
         'LanguagePreference' => 'EN'
       }

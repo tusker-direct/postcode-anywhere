@@ -3,7 +3,7 @@ require 'json'
 
 module PostcodeAnywhere
   module Response
-    class ParseJson < Faraday::Response::Middleware
+    class ParseJson < Faraday::Middleware
       WHITESPACE_REGEX = /\A^\s*$\z/
       def parse(body)
         case body
