@@ -21,7 +21,7 @@ module PostcodeAnywhere
 
     DEFAULT_FORMAT          = :json
 
-    DEFAULT_ENDPOINT        = 'http://services.postcodeanywhere.co.uk/'
+    DEFAULT_ENDPOINT        = 'https://services.postcodeanywhere.co.uk/'
 
     attr_accessor(*VALID_CONFIG_KEYS)
 
