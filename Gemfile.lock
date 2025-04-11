@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     postcode-anywhere (1.0.4)
-      faraday (~> 0.9, >= 0.9.0)
-      memoizable (~> 0.4, >= 0.4.2)
+      faraday (>= 0.9.0)
+      memoizable (>= 0.4.2)
 
 GEM
   remote: https://rubygems.org/
@@ -15,11 +15,22 @@ GEM
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
-    faraday (0.9.0)
+    faraday (1.4.2)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
+      faraday-excon (~> 1.1)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
       multipart-post (>= 1.2, < 3)
+      ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
+    faraday-excon (1.1.0)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.1.0)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
-    multipart-post (2.0.0)
+    multipart-post (2.1.1)
     parser (2.2.0.pre.4)
       ast (>= 1.1, < 3.0)
       slop (~> 3.4, >= 3.4.5)
@@ -48,12 +59,13 @@ GEM
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.4)
     ruby-progressbar (1.6.0)
-    safe_yaml (1.0.3)
+    ruby2_keywords (0.0.4)
+    safe_yaml (1.0.5)
     slop (3.6.0)
     spring (1.1.3)
     spring-commands-rspec (1.0.2)
       spring (>= 0.9.1)
-    thread_safe (0.3.4)
+    thread_safe (0.3.6)
     webmock (1.18.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -70,3 +82,6 @@ DEPENDENCIES
   rubocop (~> 0.26, >= 0.26.1)
   spring-commands-rspec (~> 1.0, >= 1.0.2)
   webmock (~> 1.18, >= 1.18.0)
+
+BUNDLED WITH
+   1.17.3

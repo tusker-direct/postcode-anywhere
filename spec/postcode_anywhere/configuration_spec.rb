@@ -27,7 +27,7 @@ describe 'configuration' do
     subject { PostcodeAnywhere.endpoint }
     it 'should return default api endpoint' do
       expect(PostcodeAnywhere::Configuration::DEFAULT_ENDPOINT).to eq(
-        'http://services.postcodeanywhere.co.uk/'
+        'https://services.postcodeanywhere.co.uk/'
       )
       is_expected.to eq PostcodeAnywhere::Configuration::DEFAULT_ENDPOINT
     end
