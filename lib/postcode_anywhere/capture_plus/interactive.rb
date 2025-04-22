@@ -18,7 +18,7 @@ module PostcodeAnywhere
         options.merge!(
           'SearchTerm' => search_term
         )
-        options['LastId'] = ParentIdExtractor.new(options.delete(:parent_query)).extract
+        options['LastId'] = ParentIdExtractor.new(options.delete(:parent_query)).extract || ''
         options['SearchFor'] = options.delete(:search_for) || EVERYTHING
         options['Country']   = options.delete(:country) || 'GBR'
         options['LanguagePreference'] = options.delete(:language) || 'EN'

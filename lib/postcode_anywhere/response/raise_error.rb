@@ -3,7 +3,7 @@ require 'postcode_anywhere/error'
 
 module PostcodeAnywhere
   module Response
-    class RaiseError < Faraday::Response::Middleware
+    class RaiseError < Faraday::Middleware
       def on_complete(response)
         status_code = response.status.to_i
         klass = PostcodeAnywhere::Error.errors[status_code]
