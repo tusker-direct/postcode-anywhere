@@ -1,5 +1,5 @@
 require 'faraday'
-require 'faraday/request/multipart'
+require 'faraday/multipart'
 require 'json'
 require 'timeout'
 require 'postcode_anywhere/error'
@@ -69,9 +69,9 @@ module PostcodeAnywhere
       connection.send(method.to_sym, path, params) do |request|
         request.body = compile_body(body_hash) unless body_hash.empty?
       end.env
-      rescue Faraday::Error::TimeoutError, Timeout::Error => error
+      rescue Faraday::TimeoutError, Timeout::Error => error
         raise(PostcodeAnywhere::Error::RequestTimeout.new(error))
-      rescue Faraday::Error::ClientError, JSON::ParserError => error
+      rescue Faraday::ClientError, JSON::ParserError => error
         raise(PostcodeAnywhere::Error.new(error))
     end
 
